@@ -29,12 +29,13 @@ func switch_1() {
 	fmt.Println("删除联系人请按4")
 	fmt.Print("请输入：")
 	fmt.Scan(&require)
+	var index int //index ,typeModify分别为返回查到的序号和，修改的选择项
 	switch require {
 	case 1:
 		addPerson()
 
 	case 2:
-		index := findPerson()
+		index = findPerson()
 		if index != -1 {
 			fmt.Println("姓名：", personList[index].name)
 			for key, value := range personList[index].phone {
@@ -46,10 +47,13 @@ func switch_1() {
 		}
 
 	case 3:
-		fmt.Println("修改联系人")
+		//修改联系2
+		modifyPerson()
+		showPerson()
+
 	case 4:
 
-		index := findPerson()
+		index = findPerson()
 		if index != -1 {
 			personList = append(personList[:index], personList[index+1:]...)
 			fmt.Println("删除成功！")
@@ -62,6 +66,45 @@ func switch_1() {
 
 }
 
+func modifyPerson() {
+	var index, typeModify int
+	var name string
+	fmt.Println("正在修改联系人，请输入需要个性的姓名")
+	index = findPerson()
+	if index != -1 {
+		for {
+			fmt.Println("修改姓名按1，修改号码按2，退出修改按7")
+			fmt.Scan(&typeModify)
+			switch typeModify {
+			case 1:
+				fmt.Println("请输入新的姓名：")
+				fmt.Scan(&name)
+				personList[index].name = name
+
+			case 2:
+				i := 0
+
+				for key, value := range personList[index].phone {
+					fmt.Printf("%s电话号：%d,修改请按%d\n,", key, value, i)
+					i++
+
+				}
+			case 7:
+				break
+			default:
+				fmt.Println("输入修改类型错误 ！")
+
+			}
+			if typeModify == 7 {
+				break
+			}
+
+		}
+	} else {
+		fmt.Println("查无此人。")
+
+	}
+}
 func addPerson() {
 	var name, type_phone string
 	var phone int
