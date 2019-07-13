@@ -25,30 +25,29 @@ func qc(s1 []string) []string {
 
 func qk(s []string) []string {
 
-
 	//返回去除空值的字符串切片,并且在原有切片上操作
-	var i int=0
+	var i int = 0
 	for _, value := range s {
-		if value!=""{
-			s[i]=value
+		if value != "" {
+			s[i] = value
 			i++
 
 		}
 	}
 	//s=s[:i]
-	fmt.Println("qk_func:",s[:i])
+	fmt.Println("qk_func:", s[:i])
 	return s[:i]
 
 }
 
-func qk2(s []string)  []string {
+func qk2(s []string) []string {
 	//返回去除空值的字符串切片
 
 	//s1:=[]string{}
-	s1:=make([]string,0,1)
+	s1 := make([]string, 0, 1)
 	for _, value := range s {
-		if value!= "" {
-			s1=append(s1,value)
+		if value != "" {
+			s1 = append(s1, value)
 		}
 	}
 
