@@ -5,19 +5,17 @@ import (
 	"os"
 )
 
-func main()  {
-    file,err :=os.Create("/Users/yu/go/src/t1/test/a.txt")
-    if err!=nil{
-    	fmt.Println(err)
+func main() {
+	file, err := os.Create("/home/yu/go/src/test1/a.txt")
+	if err != nil {
+		fmt.Println(err)
 
 	}
-    defer file.Close()
+	defer file.Close()
 
-
-    n1,err:=file.WriteString("cccccccccccccc\n")
-	n2,err:=file.Write([]byte("dddddddddddd\n"))
-	n3,err:=file.WriteString("eeeeeeeeeeeeeeee\n")
-    fmt.Println(n1,n2,n3)
-
+	n1, err := file.WriteString("cccccccccccccc\n")
+	n2, err := file.Write([]byte("dddddddddddd\n"))
+	n3, err := file.WriteString("eeeeeeeeeeeeeeee\n")
+	fmt.Println(n1, n2, n3)
 
 }
