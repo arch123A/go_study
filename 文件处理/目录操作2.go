@@ -2,14 +2,18 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"strings"
 )
 
 func main() {
 
-	//打开文件判断文件是否t文件 ...
-	f, err := os.OpenFile("/home/yu/go/src/test1/", os.O_RDONLY, os.ModeDir)
+	//打开文件判断文件是否txt文件 ,如果是则拷贝到相应的文件
+
+	path := "/home/yu/go/src/test1/"
+	dest := "/home/yu/go/src/test2/"
+	f, err := os.OpenFile(path, os.O_RDONLY, os.ModeDir)
 	if err != nil {
 		fmt.Println(err)
 
@@ -34,10 +38,50 @@ func main() {
 		if !value.IsDir() {
 			name := value.Name()
 			if strings.HasSuffix(name, "txt") {
+				ori := path + name
+				b := cpfile(ori, dest+name)
+				if b {
+					fmt.Println(name, "拷贝成功")
+				}
 
 				fmt.Println(name)
 			}
 		}
 	}
 
+}
+
+//拷贝文件，如果成功返回true,否则返回false
+func cpfile(origin, destination string) bool {
+	var finish bool = false
+	file1, err1 := os.Open(origin)
+	if err1 != nil {
+		fmt.Println(err1)
+		return finish
+	}
+	defer file1.Close()
+	file2, err2 := os.Create(destination)
+	if err2 != nil {
+		fmt.Println(err2)
+		return finish
+
+	}
+	defer file2.Close()
+	buffer := make([]byte, 1024)
+	for {
+		n, err3 := file1.Read(buffer)
+		if err3 == io.EOF {
+			//fmt.Println("finished!")
+			finish = true
+			break
+		} else if err3 != nil {
+			fmt.Println(err3)
+			break
+		}
+		//n2,_:=file2.Seek(0,2)
+		//file2.WriteAt(buffer[:n],n2)
+		file2.Write(buffer[:n])
+
+	}
+	return finish
 }
