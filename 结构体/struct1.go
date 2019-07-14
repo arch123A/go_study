@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 type Student struct {
 	name string
@@ -23,6 +26,10 @@ func main() {
 	//fmt.Println(m1.name,m1.age)
 
 	var m Movie
+	var p *Movie
+	fmt.Println(unsafe.Sizeof(m))
+	fmt.Println(unsafe.Sizeof(p))
+
 	fmt.Println(m)
 	fmt.Printf("m:%+v\n", m)
 	m.name = "美丽的生活"
@@ -32,3 +39,5 @@ func main() {
 	b := Movie{"小小人生", 23}
 	fmt.Println(b)
 }
+
+
