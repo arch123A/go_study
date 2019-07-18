@@ -17,8 +17,7 @@ func main() {
 	c <- "message2222"
 	close(c)
 	fmt.Println("close channel c")
-	time.Sleep(time.Second*1)
+	time.Sleep(time.Second * 1)
 	received(c)
-
 
 }
