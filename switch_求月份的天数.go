@@ -35,16 +35,16 @@ func main() {
 
 		switch {
 		case is_in(big, month):
-			day=31
+			day = 31
 		case is_in(small, month):
-			day=30
+			day = 30
 		case month == 2:
 			if is_run {
 				//fmt.Printf("%d年%d月有29天\n", year, month)
-				day=29
+				day = 29
 
 			} else {
-				day=28
+				day = 28
 
 			}
 		default:
@@ -52,6 +52,6 @@ func main() {
 			continue
 		}
 
-		fmt.Printf("%d年%d月有%d天\n",year,month,day)
+		fmt.Printf("%d年%d月有%d天\n", year, month, day)
 	}
 }
